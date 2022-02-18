@@ -1,0 +1,5 @@
+com\mycompany\converter\AutoConverter.class
+com\mycompany\mb\IniciarSesionMB.class
+com\mycompany\mb\PedidoMB.class
+com\mycompany\mb\MenuMB.class
+com\mycompany\mb\UsuariosMB.class

@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <div class="card">
+            <h:form>
+                <p:messages showDetail="true"/>
+                <p:autoUpdate/>
+                <p:growl id="messages"/>
+
+                <p:menubar>
+                    <p:submenu label="Acciones" icon="pi pi-fw pi-bars">
+                        <p:menuitem value="Usuarios" icon="pi pi-fw pi-users" action="#{Menu.ingreasarUusario()}"/>
+                        <p:divider />
+                        <p:submenu label="Pedido" icon="pi pi-fw pi-folder">
+                            <p:menuitem value="Ver Pedido" icon="pi pi-fw pi-calendar-plus" action="#{Menu.ingreasarVerPedido()}"/>
+                            <p:menuitem value="Crear Pedido" icon="pi pi-fw pi-plus" action="#{Pedido.ingreasarCrearPedido()}"/>
+                            <p:menuitem value="Editar Pedido" icon="pi pi-fw pi-pencil" action="#{Menu.ingreasarVerPedido()}"/>
+                            <p:menuitem value="Generar Pedido en PDF" icon="pi pi-fw pi-file-pdf"/>
+                        </p:submenu>
+                    </p:submenu>
+                    <div class="ui-input-icon-left p-mr-4" align="right">
+                        <p:menuitem value="Quit" icon="pi pi-fw pi-power-off" action="#{Menu.cerrarSesion()}"/>
+                    </div>
+                </p:menubar>
+            </h:form>
+        </div>
+        <h:form>
+            <div class="card">
+                <p:growl id="messages" showDetail="true"/>
+
+                <p:toolbar>
+                    <p:toolbarGroup align="right" >
+                        <p:commandButton value="Nuevo" icon="pi pi-plus" action="#{Usuarios.ingresarCrearUusario()}"
+                                         styleClass="ui-button-success" style="margin-right: .5rem">
+                        </p:commandButton>
+                    </p:toolbarGroup>
+                </p:toolbar>
+                <p:dataTable var="Usua" value="#{Usuarios.listaPersona}">
+                    <p:column headerText="Nombre Completo">
+                        <h:outputText value="#{Usua.nombreCompleto}" />
+                    </p:column>
+
+                    <p:column headerText="Nombre Usuario">
+                        <h:outputText value="#{Usua.nombreUsuario}" />
+                    </p:column>
+
+                    <p:column headerText="Contraseña">
+                        <h:outputText value="#{Usua.contrasena}" />
+                    </p:column>
+                    <p:column>
+                        <p:commandButton icon="pi pi-pencil" action="#{Usuarios.ingresarEditarUsuario(Usua)}"
+                                         styleClass="edit-button rounded-button ui-button-success" process="@this">
+                        </p:commandButton>
+                        <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash" process="@this"
+                                         oncomplete="PF('deleteProductDialog').show()">
+                            <f:setPropertyActionListener value="#{Usua}" target="#{Usuarios.persona}"/>
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+                <p:confirmDialog widgetVar="deleteProductDialog" showEffect="fade" width="300"
+                                 message="¿Esta seguro que desea eliminar el Registro?" header="Confirm" severity="warn">
+                    <p:commandButton value="Si" icon="pi pi-check" action="#{Usuarios.eliminarUsuario()}"
+                                     process="@this" oncomplete="PF('deleteProductDialog').hide()"/>
+                    <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                                     onclick="PF('deleteProductDialog').hide()"/>
+                </p:confirmDialog>
+            </div>
+        </h:form>
+    </h:body>
+</html>
+

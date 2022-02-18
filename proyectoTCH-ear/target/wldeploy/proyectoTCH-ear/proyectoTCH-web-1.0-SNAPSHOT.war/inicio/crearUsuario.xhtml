@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <div class="card">
+            <h:form>
+                <p:menubar>
+                    <p:submenu label="Acciones" icon="pi pi-fw pi-bars">
+                        <p:menuitem value="Usuarios" icon="pi pi-fw pi-users" action="#{Menu.ingreasarUusario()}"/>
+                        <p:divider />
+                        <p:submenu label="Pedido" icon="pi pi-fw pi-folder">
+                            <p:menuitem value="Ver Pedido" icon="pi pi-fw pi-calendar-plus" action="#{Menu.ingreasarVerPedido()}"/>
+                            <p:menuitem value="Crear Pedido" icon="pi pi-fw pi-plus" action="#{Pedido.ingreasarCrearPedido()}"/>
+                            <p:menuitem value="Editar Pedido" icon="pi pi-fw pi-pencil" action="#{Menu.ingreasarVerPedido()}"/>
+                            <p:menuitem value="Generar Pedido en PDF" icon="pi pi-fw pi-file-pdf"/>
+                        </p:submenu>
+                    </p:submenu>
+                    <div class="ui-input-icon-left p-mr-4" align="right">
+                        <p:menuitem value="Quit" icon="pi pi-fw pi-power-off" action="#{Menu.cerrarSesion()}"/>
+                    </div>
+                </p:menubar>
+            </h:form>
+        </div>
+        <h:form>
+            <p:messages showDetail="true">
+                <p:autoUpdate/>
+            </p:messages>
+            <div class="card" align="center">
+                <div class="ui-g">
+                    <div class="ui-g-4">
+                        <p:outputLabel for="txtNombreCompleto" value="Nombre Completo"/>
+                        <p:inputText id="txtNombreCompleto" required="true" value="#{Usuarios.persona.nombreCompleto}"/>
+                    </div>
+                    <div class="ui-g-4">
+                        <p:outputLabel for="txtNombreUsuario" value="Nombre Usuario"/>
+                        <p:inputText id="txtNombreUsuario" required="true" value="#{Usuarios.persona.nombreUsuario}"/>
+                    </div>
+                    <div class="ui-g-4">
+                        <p:outputLabel for="txtContraseña" value="Contraseña"/>
+                        <p:inputText  id="txtContraseña" required="true" type="password" value="#{Usuarios.persona.contrasena}"/>
+                    </div>
+                    <div class="ui-g-6" align="right">
+                        <p:column/>
+                        <p:commandButton value="Guardar" icon = "ui-icon-key" action="#{Usuarios.gestionarUsuario()}"/>
+                    </div>
+                    <div class="ui-g-6" align="left">
+                        <p:column/>
+                        <p:commandButton value="Cancelar" styleClass="ui-button-danger" type="button" onclick="#{Usuarios.cancelar()}"/>
+    
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </h:body>
+</html>
+

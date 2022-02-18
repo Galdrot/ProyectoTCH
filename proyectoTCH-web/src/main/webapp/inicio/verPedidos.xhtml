@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <div class="card">
+            <h:form>
+                <p:messages showDetail="true">
+                    <p:autoUpdate/>
+                </p:messages>
+
+
+                <p:menubar>
+                    <p:submenu label="Acciones" icon="pi pi-fw pi-bars">
+                        <p:menuitem value="Usuarios" icon="pi pi-fw pi-users" action="#{Menu.ingreasarUusario()}"/>
+                        <p:divider />
+                        <p:submenu label="Pedido" icon="pi pi-fw pi-folder">
+                            <p:menuitem value="Ver Pedido" icon="pi pi-fw pi-calendar-plus" action="#{Menu.ingreasarVerPedido()}"/>
+                            <p:menuitem value="Crear Pedido" icon="pi pi-fw pi-plus" action="#{Pedido.ingreasarCrearPedido()}"/>
+                            <p:menuitem value="Editar Pedido" icon="pi pi-fw pi-pencil" action="#{Menu.ingreasarVerPedido()}"/>
+                            <p:menuitem value="Generar Pedido en PDF" icon="pi pi-fw pi-file-pdf"/>
+                        </p:submenu>
+                    </p:submenu>
+                    <div class="ui-input-icon-left p-mr-4" align="right">
+                        <p:menuitem value="Quit" icon="pi pi-fw pi-power-off" action="#{Menu.cerrarSesion()}"/>
+                    </div>
+                </p:menubar>
+            </h:form>
+        </div>
+        <h:form id="form">
+            <div class="card" align="center">
+                <div class="ui-g">
+                    <div class="ui-g-4">
+                        <p:outputLabel for="txtNumeroPedido" value="Numero Pedido"/>
+                        <p:inputText id="txtNumeroPedido" value="#{Pedido.cabP.idCabecera}"/>
+                    </div>
+                    <div class="ui-g-4">
+                        <p:outputLabel for="txtFechaPedido" value="Fecha Pedido"/>
+                        <p:datePicker id="txtFechaPedido" value="#{Pedido.cabP.fechaPedido}"/>
+                    </div>
+                    <div class="ui-g-4">
+                        <p:outputLabel for="txtIdentificacionCliente" value="Identificación"/>
+                        <p:inputText  id="txtIdentificacionCliente" value="#{Pedido.cabP.identificacionCliente}"/>
+                    </div>
+                    <div class="ui-g-12">
+                        <p:commandButton value="Buscar" action="#{Pedido.buscarCabeceraPedido()}" update="@form"/>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <p:growl id="msgs" showDetail="true"/>
+                <p:dataTable var="ca" value="#{Pedido.listaCabP}">
+
+                    <p:column headerText="Numero de Pedido">
+                        <h:outputText value="#{ca.idCabecera}" />
+                    </p:column>
+
+                    <p:column headerText="Fecha del pedido">
+                        <h:outputText value="#{ca.fechaPedido}" />
+                    </p:column>
+
+                    <p:column headerText="Nombre del Cliente">
+                        <h:outputText value="#{ca.nombreCliente}" />
+                    </p:column>
+
+                    <p:column headerText="Identificacion del Cliente">
+                        <h:outputText value="#{ca.identificacionCliente}" />
+                    </p:column>
+                    <p:column headerText="Direccion del Cliente">
+                        <h:outputText value="#{ca.direccionCliente}" />
+                    </p:column>
+                    <p:column headerText="Correo del Cliente">
+                        <h:outputText value="#{ca.correoCliente}" />
+                    </p:column>
+                    <p:column headerText="Moneda del pedido">
+                        <h:outputText value="#{ca.moneda.divisa}" />
+                    </p:column>
+                    <p:column>
+                        <p:commandButton icon="pi pi-pencil" action="#{Pedido.ingresarEditarUsuario(ca)}"
+                                         styleClass="edit-button rounded-button ui-button-success" process="@this">
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </div>
+        </h:form>
+    </h:body>
+</html>
+
