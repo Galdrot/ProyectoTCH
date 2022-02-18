@@ -125,7 +125,7 @@
                             <p:commandButton value="Guardar" action="#{Pedido.gestionarPedido()}" styleClass="ui-button-success" update="@form"/>
                         </div>
                         <div class="ui-g-3">
-                            <p:commandButton value="Cancelar" styleClass="ui-button-danger" action="#{Pedido.cancelar()}" update="@form"/>
+                            <p:commandButton value="Cancelar" styleClass="ui-button-danger" action="#{Pedido.cancelar()}" immediate="true"/>
                         </div>
                     </div>
                 </div>
