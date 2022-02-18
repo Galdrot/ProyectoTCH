@@ -53,4 +53,5 @@ public class TBCabeceraPedido implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_Moneda")
     private TBTipoMoneda moneda;
+    
 }
